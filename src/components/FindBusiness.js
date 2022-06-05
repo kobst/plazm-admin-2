@@ -11,6 +11,7 @@ function SearchLocationInput({id,handleChange,disabled,error,setGoogleInfo,setNa
             const loadScript = (url, callback) => {
                 let script = document.createElement("script");
                 script.type = "text/javascript";
+                script.src = url;
     
                     if (script.readyState) {
                         script.onreadystatechange = function() {
@@ -24,7 +25,7 @@ function SearchLocationInput({id,handleChange,disabled,error,setGoogleInfo,setNa
                                      script.onload = () => callback();
                                 }
     
-                        script.src = url;
+                        
                         document.getElementsByTagName("head")[0].appendChild(script);
                         };
     
@@ -51,7 +52,7 @@ function SearchLocationInput({id,handleChange,disabled,error,setGoogleInfo,setNa
         }, []);
 
         return (
-            <> {ready &&  <Input
+           <Input
                 error={error}
                 id={id}
                 refs={autoCompleteRef}
@@ -60,9 +61,8 @@ function SearchLocationInput({id,handleChange,disabled,error,setGoogleInfo,setNa
                 placeholder=""
                 value={query}
                 disabled={disabled}
-            />}
-            </>
-
+            />
+        
             
             );
         }
