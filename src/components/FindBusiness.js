@@ -41,10 +41,8 @@ function SearchLocationInput({id,handleChange,disabled,error,setGoogleInfo,setNa
                      updateQuery(value)
                 }
 
-            useEffect(() => {
-            loadScript(
-            `${process.env.REACT_APP_GOOGLE_API_STRING}`,
-             () => handleScriptLoad(setQuery, autoCompleteRef)
+        useEffect(() => {
+            loadScript(`${process.env.REACT_APP_GOOGLE_API_STRING_2}`,() => handleScriptLoad(setQuery, autoCompleteRef)
             );
         // eslint-disable-next-line react-hooks/exhaustive-deps
         }, []);
