@@ -203,7 +203,7 @@ const SearchForm = () => {
     let result = await updateBusiness(existingInfo, _imageUrl, null)
     if (result) {
         console.log(result)
-        setSuccessMessage(existingInfo.company_name + " was updated successfully")
+        setSuccessMessage(existingInfo.company_name + result["message"])
         setGoogleInfo(null)
         setMissingInfo()
         setImagePreview()
@@ -316,8 +316,8 @@ const SearchForm = () => {
         }
         if (imageFile && googleInfo) {
           console.log("business info and media exist")
-          uploadPhoto()
-          // newUploadPhoto()
+          // uploadPhoto()
+          newUploadPhoto()
         }
       };
 
