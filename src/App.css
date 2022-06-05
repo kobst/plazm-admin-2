@@ -24,6 +24,22 @@
   color: white;
 }
 
+.header {
+  background-color: #282c34;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: white;
+}
+
+
+.sign-out {
+  background-color: #282c34;
+  font-size: 20px;
+  color: white;
+}
+
 .App-link {
   color: #61dafb;
 }
