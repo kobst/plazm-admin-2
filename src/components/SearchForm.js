@@ -13,6 +13,7 @@ import './styles.css'
 import ExistingBusinessCard from "./ExistingBusinessCard";
 import GoogleInfoCard from './GoogleInfoCard'
 import SearchLocationInput from "./FindBusiness";
+import GoogleAutoFill from "./NewFindBusiness";
 import MissingInfoPopUp from './MissingInfoPopUp'
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack'
@@ -130,6 +131,7 @@ const SearchForm = () => {
 
     useEffect(()=> {
         if (googleInfo) {
+          console.log("gggg")
             console.log("googleInfo" + JSON.stringify(googleInfo))
             checkBusinessExists(googleInfo.name)
         }
@@ -328,11 +330,14 @@ const SearchForm = () => {
     return (<div className="basic-form">  
 
     <div className="input-block">
-    <SearchLocationInput className="search-input" id="location"  handleChange={handleChange} setGoogleInfo={setGoogleInfo} />
+      <GoogleAutoFill setGoogleInfo={setGoogleInfo}/>
+    {/* <SearchLocationInput className="search-input" id="location"  handleChange={handleChange} setGoogleInfo={setGoogleInfo} /> */}
       <button type="submit" onClick={refreshPage} maxWidth="183px" className="btnRegister"> refresh </button>
+      
       <div style={{height: 120, width: 300, padding: 20}}>
         {googleInfo && <GoogleInfoCard {...googleInfo}/>} 
       </div>
+      
 
     </div>
 <span></span>
