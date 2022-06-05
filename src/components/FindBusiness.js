@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import Input from './Input'
 
+// https://betterprogramming.pub/the-best-practice-with-google-place-autocomplete-api-on-react-939211e8b4ce
 function SearchLocationInput({id,handleChange,disabled,error,setGoogleInfo,setName}) { 
             const [query, setQuery] = useState("");
             const autoCompleteRef = useRef(null);
+            const [ready, setReady] = useState(false)
             let autoComplete;
 
             const loadScript = (url, callback) => {
@@ -13,6 +15,7 @@ function SearchLocationInput({id,handleChange,disabled,error,setGoogleInfo,setNa
                     if (script.readyState) {
                         script.onreadystatechange = function() {
                             if (script.readyState === "loaded" || script.readyState === "complete") {
+                            setReady(true)
                             script.onreadystatechange = null;
                             callback();
                         }
@@ -48,7 +51,7 @@ function SearchLocationInput({id,handleChange,disabled,error,setGoogleInfo,setNa
         }, []);
 
         return (
-            <Input
+            <> {ready &&  <Input
                 error={error}
                 id={id}
                 refs={autoCompleteRef}
@@ -57,7 +60,9 @@ function SearchLocationInput({id,handleChange,disabled,error,setGoogleInfo,setNa
                 placeholder=""
                 value={query}
                 disabled={disabled}
-            />
+            />}
+            </>
+
             
             );
         }
