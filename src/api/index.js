@@ -54,11 +54,29 @@ export const callPlace = async (userSub) => {
     return body;
   };
 
+export const updateProfilePhoto = async (_id, baseUrl) => {
+    console.log("update profile photo")
+    const response = await fetch(`${process.env.REACT_APP_API_LOCAL}/api/profilePhoto`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        _id: _id,
+        file: baseUrl
+      }),
+    });
+    const body = await response.text();
+    return body;
+  }
+
+
   export const updateBusiness = async (value, baseUrl, userSub) => {
     let _twitter
     let _instagram
     let _facebook
     let linkedin
+    
     if (value.handles) {
       if (value.handles.twitter){
         _twitter = value.handles.twitter
@@ -69,8 +87,10 @@ export const callPlace = async (userSub) => {
       if (value.handles.facebook) {
         _facebook = value.handles.facebook
       }
-
     }
+    console.log(value)
+    console.log(value.genType)
+
     const response = await fetch(`${process.env.REACT_APP_API_URL}/api/place`, {
       method: "PUT",
       headers: {
@@ -107,3 +127,5 @@ export const callPlace = async (userSub) => {
     const body = await response.text();
     return body;
   };
+
+

@@ -25,6 +25,7 @@ import {
   callApi,
   addBusiness,
   updateBusiness,
+  updateProfilePhoto
 } from "../api/index";
 
 
@@ -203,6 +204,7 @@ const SearchForm = () => {
   const updateBusinessPhoto = async (_imageUrl) => {
     console.log(_imageUrl)
     let result = await updateBusiness(existingInfo, _imageUrl, null)
+    // let result = await updateProfilePhoto(existingInfo._id, _imageUrl)
     if (result) {
         console.log(result)
         setSuccessMessage(existingInfo.company_name + result["message"])
@@ -221,8 +223,9 @@ const SearchForm = () => {
     const newUploadPhoto = async () => {
       const file = imageFile
       const newName = (googleInfo.name + googleInfo.place_id)
-      const baseUrl = `https://${bucket}.s3.amazonaws.com/UserProfiles/${newName}`;
-      Storage.put(newName, file, {
+      const newNameClean = newName.replace(/\s+/g, '')
+      const baseUrl = `https://${bucket}.s3.amazonaws.com/UserProfiles/${newNameClean}`;
+      Storage.put(newNameClean, file, {
         resumable: true,
         contentType: file.type,
         customPrefix: {public:'UserProfiles/'},
