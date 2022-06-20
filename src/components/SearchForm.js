@@ -14,7 +14,7 @@ import ExistingBusinessCard from "./ExistingBusinessCard";
 import GoogleInfoCard from './GoogleInfoCard'
 import SearchLocationInput from "../junked/FindBusiness";
 import GoogleAutoFill from "./NewFindBusiness";
-import MissingInfoPopUp from './MissingInfoPopUp'
+import MissingInfoPopUp from '../junked/MissingInfoPopUp'
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack'
 import useStore from "../useStore";
@@ -153,6 +153,7 @@ const SearchForm = () => {
               let fullGoogleAddress = googleInfo.formatted_address
               let shortElementAddress = fullElementAddress.substring(0,5)
               let shortGoogleAddress = fullGoogleAddress.substring(0,5)
+              matching.push(element)
               if (shortElementAddress === shortGoogleAddress){
                   console.log("Trueeee")
                   exists = true
@@ -160,9 +161,9 @@ const SearchForm = () => {
                   setExistingBusinessInfo(element)
                   setShowEdit(true)
                   setExistingImageUrl(element.default_image_url)
-              } else {
-                matching.push(element)
-              }
+              } 
+                
+       
           })
       } 
       console.log("matching " + matching.length)
@@ -240,60 +241,9 @@ const SearchForm = () => {
             console.error('Unexpected error while uploading', err);
         }
 })
-      // try {
-      //   await Storage.put(newName, file, {
-      //     contentType: file.type, // contentType is optional
-      //   });
-      // } catch (error) {
-      //   console.log("Error uploading file: ", error);
-      // }
 
     }
 
-    const uploadPhoto = async () => {
-    
-            const file = imageFile
-            const newName = (googleInfo.name + googleInfo.place_id)
-            const baseUrl = `https://${bucket}.s3.amazonaws.com/UserProfiles/${newName}`;
-            const value = await fetch(
-              `${process.env.REACT_APP_API_URL}/api/upload_photo`,
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  Key: newName,
-                  ContentType: file.type,
-                }),
-              }) 
-
-            const body = await value.text();
-            const Val = JSON.parse(body);
-            console.log(Val)
-        
-            await fetch(Val, {
-              method: "PUT",
-              headers: {
-                "Content-Type": file.type,
-              },
-              body: file,
-            })
-              .then((response) =>  {
-                if (response) {
-                  uploadUpdate(baseUrl)
-                }
-              }
-                )
-              .catch(
-                (error) => {
-                  console.log("ERROR")
-                  console.log(error)
-                } // Handle the error response object
-              );
-      };
-    
-  
 
 
     const handleChange =(e) => {
@@ -347,7 +297,6 @@ const SearchForm = () => {
 <ColoredLine color="red" />
 
 
-<MissingInfoPopUp missingInfo={missingInfo} showMissingInfo={showMissingInfo} setShowMissingInfo={setShowMissingInfo} />
 {/* {existingInfo && <EditPopUp showEdit={businessExists} setShowEdit={setShowEdit} name={existingInfo.company_name} address={existingInfo.address} imageUrl={existingInfo.default_image_url}/>} */}
 
 {successMessage && <h3>{successMessage}</h3>}
@@ -363,20 +312,14 @@ const SearchForm = () => {
 </div>
 
 
-{matchingBusinesses.length > 0 && <h3> other matching businessses</h3>}
+{matchingBusinesses.length > 0 && <h3>  matching businessses</h3>}
 <Stack>
 {matchingBusinesses.length > 0 && <>{matchingBusinesses.map(function(matchingBus, index){
-                    return <ExistingBusinessCard name={matchingBus.company_name} address={matchingBus.address} default_image_url={matchingBus.default_image_url} index={index} />;
+            return <ExistingBusinessCard name={matchingBus.company_name} address={matchingBus.address} id={matchingBus._id} key={matchingBus._id} default_image_url={matchingBus.default_image_url} index={index} />;
   })}
   </>
   }
 </Stack>
-
-
-
-
-
-
 
 
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -13,6 +14,7 @@ import noImage from '../assets/noImage.png'
 import useStore from "../useStore";
 
 
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -29,12 +31,18 @@ const styles = theme => ({
     }
   });
 
-const ExistingBusinessCard = ({name, address, default_image_url, index} ) => {
+const ExistingBusinessCard = ({name, address, id, default_image_url, index} ) => {
 
     const setExistingBusinessInfo = useStore(state => state.setExistingBusinessInfo)    
     const matchingBusinessInfo = useStore(state => state.matchingBusinessInfo)
 
+    let navigate = useNavigate()
+    
+    const handleSelect = () => {
+      setExistingBusinessInfo(matchingBusinessInfo[index])
+      navigate(`/place/${id}`)
 
+    }
     const setNewBusiness =() => {
         setExistingBusinessInfo(matchingBusinessInfo[index])
     }
@@ -50,9 +58,13 @@ const ExistingBusinessCard = ({name, address, default_image_url, index} ) => {
             },
           }}>
              <CardActions>
-            <Button size="small" variant="secondary" onClick={setNewBusiness}>Edit</Button>
-            {/* <Button size="small" variant="secondary">Edit</Button> */}
+             <Button size="small" variant="secondary" onClick={handleSelect}>Edit</Button>
 
+            {/* <Button size="small" variant="secondary" onClick={setNewBusiness}>Edit</Button> */}
+            {/* <Button size="small" variant="secondary">Edit</Button> */}
+            
+
+          {/* <Link to={`/place/${id}`}>Go TO DETAIL</Link> */}
           </CardActions>
           <CardMedia
             component="img"
