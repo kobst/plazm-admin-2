@@ -12,7 +12,7 @@ import { S3Client, AbortMultipartUploadCommand } from "@aws-sdk/client-s3";
 import './styles.css'
 import ExistingBusinessCard from "./ExistingBusinessCard";
 import GoogleInfoCard from './GoogleInfoCard'
-import SearchLocationInput from "./FindBusiness";
+import SearchLocationInput from "../junked/FindBusiness";
 import GoogleAutoFill from "./NewFindBusiness";
 import MissingInfoPopUp from './MissingInfoPopUp'
 import Box from '@mui/material/Box';

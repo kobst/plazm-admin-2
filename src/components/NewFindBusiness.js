@@ -16,6 +16,7 @@ const GoogleAutoFill = ({setGoogleInfo}) => {
         }}
         options={{
             types: [],
+            componentRestrictions: { country: "USA" },
             fields: ["name", "formatted_address", "international_phone_number", "place_id", "url", "rating", "website", "geometry", "business_status"]
         }}
 />;
