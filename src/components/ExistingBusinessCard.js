@@ -40,7 +40,10 @@ const ExistingBusinessCard = ({name, address, id, default_image_url, index} ) =>
     
     const handleSelect = () => {
       setExistingBusinessInfo(matchingBusinessInfo[index])
-      navigate(`/place/${id}`)
+      let businessInfo = matchingBusinessInfo[index]
+      navigate(`/place/${id}`, {
+        businessInfo: businessInfo
+      })
 
     }
     const setNewBusiness =() => {

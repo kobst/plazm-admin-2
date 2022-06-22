@@ -76,6 +76,7 @@ export const updateProfilePhoto = async (_id, baseUrl) => {
     let _instagram
     let _facebook
     let linkedin
+
     
     if (value.handles) {
       if (value.handles.twitter){
@@ -88,8 +89,7 @@ export const updateProfilePhoto = async (_id, baseUrl) => {
         _facebook = value.handles.facebook
       }
     }
-    console.log(value)
-    console.log(value.genType)
+
 
     const response = await fetch(`${process.env.REACT_APP_API_URL}/api/place`, {
       method: "PUT",

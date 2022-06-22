@@ -67,45 +67,45 @@ const DoesNotExist = ({handleSubmit, onImageUploadChange, imagePreview}) => {
 
 }
 
-const BusinessExists = ({handleSubmit, onImageUploadChange, imagePreview}) => {
+// const BusinessExists = ({handleSubmit, onImageUploadChange, imagePreview}) => {
 
-  const [name, setName] = useState()
-  const [address, setAddress] = useState()
-  // const [imagePreview, setImagePreview] = useState()
+//   const [name, setName] = useState()
+//   const [address, setAddress] = useState()
+//   // const [imagePreview, setImagePreview] = useState()
 
-  const existingBusinessInfo = useStore(state => state.existingBusinessInfo)
+//   const existingBusinessInfo = useStore(state => state.existingBusinessInfo)
 
-  useEffect(()=>{
-    if (existingBusinessInfo){
-      console.log("check existing Business " + existingBusinessInfo.company_name)
-      setName(existingBusinessInfo.company_name)
-      setAddress(existingBusinessInfo.address)
-    }
-  }, [existingBusinessInfo])
+//   useEffect(()=>{
+//     if (existingBusinessInfo){
+//       console.log("check existing Business " + existingBusinessInfo.company_name)
+//       setName(existingBusinessInfo.company_name)
+//       setAddress(existingBusinessInfo.address)
+//     }
+//   }, [existingBusinessInfo])
 
 
-  return (
-  <Box sx={{ border: '1px dashed grey' }}>
-       <h3>business exist in db</h3>
-       <h5>{name}</h5>
-       <h5>{address}</h5>
-      {existingBusinessInfo && <div className="image-display">
-        <img src={existingBusinessInfo.default_image_url}  onError={(e) => (e.target.onerror = null, e.target.src = noImage)}/>
-    </div> } 
-    <div className="add-new-image-container-">
-       <div className="image=uploader">
-         <input type="file" id="file-input" name="ImageStyle" onChange={onImageUploadChange}/>
-      </div>
-      <div className="image-display">
-       <img src={imagePreview} alt="" />
-     </div>
-    </div>
+//   return (
+//   <Box sx={{ border: '1px dashed grey' }}>
+//        <h3>business exist in db</h3>
+//        <h5>{name}</h5>
+//        <h5>{address}</h5>
+//       {existingBusinessInfo && <div className="image-display">
+//         <img src={existingBusinessInfo.default_image_url}  onError={(e) => (e.target.onerror = null, e.target.src = noImage)}/>
+//     </div> } 
+//     <div className="add-new-image-container-">
+//        <div className="image=uploader">
+//          <input type="file" id="file-input" name="ImageStyle" onChange={onImageUploadChange}/>
+//       </div>
+//       <div className="image-display">
+//        <img src={imagePreview} alt="" />
+//      </div>
+//     </div>
 
-  <button type="submit" onClick={handleSubmit} maxWidth="183px" className="btnRegister"> Update </button>
-  </Box>
-  )
+//   <button type="submit" onClick={handleSubmit} maxWidth="183px" className="btnRegister"> Update </button>
+//   </Box>
+//   )
 
-}
+// }
 
 
 const SearchForm = () => {
@@ -154,14 +154,14 @@ const SearchForm = () => {
               let shortElementAddress = fullElementAddress.substring(0,5)
               let shortGoogleAddress = fullGoogleAddress.substring(0,5)
               matching.push(element)
-              if (shortElementAddress === shortGoogleAddress){
-                  console.log("Trueeee")
-                  exists = true
-                  setExistingInfo(element)
-                  setExistingBusinessInfo(element)
-                  setShowEdit(true)
-                  setExistingImageUrl(element.default_image_url)
-              } 
+              // if (shortElementAddress === shortGoogleAddress){
+              //     console.log("Trueeee")
+              //     exists = true
+              //     setExistingInfo(element)
+              //     setExistingBusinessInfo(element)
+              //     setShowEdit(true)
+              //     setExistingImageUrl(element.default_image_url)
+              // } 
                 
        
           })
@@ -307,7 +307,8 @@ const SearchForm = () => {
 
 <div className="center">
 {/* {googleInfo && (existingInfo ? <><ExistingBusinessCard {...existingInfo} setShowEdit={setShowEdit}/> <BusinessExists handleSubmit={handleSubmit} onImageUploadChange={onImageUploadChange} imagePreview={imagePreview}/> </> : <DoesNotExist handleSubmit={handleSubmit} onImageUploadChange={onImageUploadChange} imagePreview={imagePreview}/>)} */}
-{googleInfo && (existingBusinessInfo ? <BusinessExists handleSubmit={handleSubmit} onImageUploadChange={onImageUploadChange} imagePreview={imagePreview}/> : <DoesNotExist handleSubmit={handleSubmit} onImageUploadChange={onImageUploadChange} imagePreview={imagePreview}/>)}
+{/* {googleInfo && (existingBusinessInfo ? <BusinessExists handleSubmit={handleSubmit} onImageUploadChange={onImageUploadChange} imagePreview={imagePreview}/> : <DoesNotExist handleSubmit={handleSubmit} onImageUploadChange={onImageUploadChange} imagePreview={imagePreview}/>)} */}
+{googleInfo && (matchingBusinesses.length < 1) && <DoesNotExist handleSubmit={handleSubmit} onImageUploadChange={onImageUploadChange} imagePreview={imagePreview}/>}
 
 </div>
 
