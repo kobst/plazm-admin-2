@@ -89,17 +89,18 @@ const EditDetailsPage = (businessInfo) => {
 
 
     const handleChange = (e) => {
+        console.log(e.target.value)
         setValues({ ...values, [e.target.name]: e.target.value });
       };
-    
+      
       const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(values.default_image_url)
+        console.log(values)
         if (changedImage) {
             newUploadPhoto()
-            console.log("no change")
+            console.log("changed phoot")
         } else {
-            console.log("changed")
+            console.log("did not change photo")
             let result = await updateBusiness(values, values.default_image_url, null)
             // let result = await updateProfilePhoto(existingInfo._id, _imageUrl)
             if (result) {

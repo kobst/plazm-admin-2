@@ -29,7 +29,6 @@ export const callPlace = async (userSub) => {
 
 
 
-
   export const addBusiness = async (businessInfo, baseUrl) => {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/api/place`, {
       method: "POST",
@@ -47,7 +46,26 @@ export const callPlace = async (userSub) => {
         website: businessInfo.website,
         latitude: businessInfo.geometry.location.lat(),
         longitude: businessInfo.geometry.location.lng(),
-        file: baseUrl
+        file: baseUrl,
+        facebook: null,
+        twitter: null, 
+        instragram: null, 
+        linkedin: null,
+        city: null,
+        postalCode: null,
+        stateProvince: null,
+        openingHours: null,
+        hoursFormat: null,
+        genType: null,
+        type: null,
+        userSub: null, 
+        profilePhotoAvailable: true,
+        price: null,
+        filterTags: [],
+        groupClassification: null,
+
+
+       
       }),
     });
     const body = await response.text();
